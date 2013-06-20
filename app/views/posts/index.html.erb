@@ -1,0 +1,11 @@
+<% @posts.each do |post| %>
+		<div class="well span8">
+			<p><%= link_to post.title, post.url %></p>
+			<p><%= post.description %></p>
+			<p>post by <%=post.user.username %></p>
+			<br/>
+			<p><%= link_to "#{post.comments.count} comments", post_path(post)%></p>
+		</div>
+	<% end %>
+
+

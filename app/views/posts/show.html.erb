@@ -1,0 +1,33 @@
+<p class="lead"><%= link_to @post.title, @post.url %></p>
+<hr>
+<p></p>
+<p><%= @post.description %></p>
+<hr>
+<p></p>
+	
+<% if logged_in? %>
+	<%= render 'shared/errors', obj: @comment %>
+
+	<%= form_for [@post, @comment] do |f| %>
+		<div class="control_group">
+			<%= f.label :comment, "Leave a comment" %>
+			<%= f.text_area :comment_text, rows: "3", class: "span4" %>
+			<br/>
+			<%= f.submit class: "btn btn-primary" %>
+		</div>
+	<% end %>
+<% end %>
+<hr>
+
+<h6>Comments</h6>
+<div class="row">
+	<% @post.comments.each do |comment| %>
+		<div class="well span8">
+			<em>
+				<p>"<%= comment.comment_text %>"</p>
+				<p>by <%= comment.user.username %></p>
+			</em>
+		</div>
+	<% end %>
+</div>
+
