@@ -13,6 +13,17 @@ before_filter :require_user
   	end
   end
 
+  def vote
+    @comment = Comment.find(params[:id])
+    @comment.votes.create(vote: params[:vote], user: current_user)
+    respond_to do |format|
+      format.html do
+        redirect_to :back, notice: "Your vote was counted."
+      end
+      format.js
+    end
+  end
+
 
 
 end

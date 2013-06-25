@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-before_filter :find_post, only: [:show, :edit]
+before_filter :find_post, only: [:show, :edit, :vote]
 
 before_filter :require_user, only: [:new, :edit, :create, :update]
 
@@ -10,6 +10,7 @@ before_filter :require_user, only: [:new, :edit, :create, :update]
 
   def new
     @post=Post.new
+    @categories_array = Category.all.map{ |category| [category.name, category.id]}
   end
 
   def create
@@ -39,6 +40,16 @@ before_filter :require_user, only: [:new, :edit, :create, :update]
       render :edit
     end
 	end
+
+  def vote
+    @post.votes.create(vote: params[:vote], user: current_user)
+    respond_to do |format|
+      format.html do
+        redirect_to :back, notice: "Your vote was counted."
+      end
+      format.js
+    end
+  end
 
   protected    
   

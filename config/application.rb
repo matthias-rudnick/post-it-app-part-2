@@ -60,5 +60,9 @@ module Postit
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    #Set timezone for the app to the local timezone
+    config.time_zone = 'Berlin' 
+    config.active_record.default_timezone = :local
   end
 end
