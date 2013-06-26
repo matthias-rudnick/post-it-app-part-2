@@ -14,9 +14,8 @@ before_filter :require_user, only: [:new, :edit, :create, :update]
   end
 
   def create
-  	@post = Post.create(params[:post])
+  	@post = Post.create(post_params)
   	@post.user_id = current_user.id
-
   	if @post.save
   		redirect_to '/', notice: "Post was successfully created."
   	else #validation failure
@@ -34,7 +33,7 @@ before_filter :require_user, only: [:new, :edit, :create, :update]
 
 	def update 
 		@post = Post.find(params[:id])
-    if @post.update_attributes(params[:post])
+    if @post.update_attributes(post_params)
       redirect_to post_path(@post), notice: "You successfully updated your post."
     else #validation failure
       render :edit
@@ -55,6 +54,10 @@ before_filter :require_user, only: [:new, :edit, :create, :update]
   
   def find_post
     @post = Post.find(params[:id])
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :url, :description, :category_ids =>[])
   end
 
 end

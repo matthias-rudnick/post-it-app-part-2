@@ -6,7 +6,7 @@ before_filter :require_user, except: [:show]
 	end
 
 	def create
-		@category = Category.create(params[:category])
+		@category = Category.create(category_params)
 
 		if @category.save
 			redirect_to root_path, notice: 'Category has been created.'
@@ -21,5 +21,11 @@ before_filter :require_user, except: [:show]
 		@category = Category.find(params[:id])
 		@posts = @category.posts
 	end
+
+	private
+
+	def category_params
+    params.require(:category).permit(:name)
+  end
 
 end
