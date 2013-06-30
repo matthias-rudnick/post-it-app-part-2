@@ -9,8 +9,7 @@ gem 'bcrypt-ruby'
 gem 'friendly_id'
 gem 'strong_parameters'
 gem 'haml'
-gem 'voteable-mr', path: '/home/matthias/Dokumente/Programmieren/Ruby_on_Rails_Course@tealeaf/Ruby_on_Rails_Course_2/Ruby_Rails_reentry/postit-template/voteable-mr_gem' 
-
+gem 'voteable-mr'
 
 # Gems used only for assets and not required
 # in production environments by default.
