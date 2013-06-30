@@ -1,4 +1,6 @@
 class Comment < ActiveRecord::Base
+	include Voteable
+	
 	belongs_to :post
 	belongs_to :user
 
@@ -6,7 +8,4 @@ class Comment < ActiveRecord::Base
 
 	validates :comment_text, presence: true
 
-	def total_votes
-		self.votes.where(vote: true).size - self.votes.where(vote: false).size
-	end
 end

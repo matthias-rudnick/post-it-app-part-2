@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+	include Voteable
 	extend FriendlyId
   friendly_id :title, use: :slugged
 
@@ -14,7 +15,4 @@ class Post < ActiveRecord::Base
 	validates :title, presence: true
 	validates :url, presence: true
 
-	def total_votes
-		self.votes.where(vote: true).size - self.votes.where(vote: false).size
-	end
 end

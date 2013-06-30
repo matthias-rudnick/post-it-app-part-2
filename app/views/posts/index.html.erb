@@ -24,6 +24,13 @@
 			</p>
 			<br/>
 			<p><%= link_to "#{post.comments.count} comments", post_path(post)%></p>
+			<br/>
+			<% if admin? %>
+			<p><%= link_to post_path(post), method: "delete" do %>
+				<i class='btn btn-danger'>Delete Post</i>
+			<% end %>
+			</p>
+			<% end %>
 		</div>
 	</div>
 	<% end %>

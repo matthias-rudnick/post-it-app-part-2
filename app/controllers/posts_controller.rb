@@ -1,8 +1,10 @@
 class PostsController < ApplicationController
 
-before_filter :find_post, only: [:show, :edit, :vote]
+before_filter :find_post, only: [:show, :edit, :vote, :destroy]
 
 before_filter :require_user, only: [:new, :edit, :create, :update]
+
+before_filter :require_admin, only: [:destroy]
 
   def index
   	@posts = Post.all
@@ -29,6 +31,12 @@ before_filter :require_user, only: [:new, :edit, :create, :update]
 
   def edit
 
+  end
+
+  def destroy
+    if @post.destroy
+      redirect_to root_path, notice: "You successfully remove the post"
+    end
   end
 
 	def update 

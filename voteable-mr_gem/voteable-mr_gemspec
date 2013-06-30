@@ -1,0 +1,12 @@
+Gem::Specification.new do |s|
+  s.name        = 'voteable-mr'
+  s.version     = '0.0.0'
+  s.authors     = ["Matthias Rudnick"]
+  s.email       = ["mail@matthias-rudnick.de"]
+  s.homepage    = "http://www.matthias-rudnick.de"
+  s.summary     = "count votes"
+  s.description = "Method to count votes, if you have a table votes with column vote: boolean."
+  s.files        = "lib/voteable-mr.rb"
+
+end
+

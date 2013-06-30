@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :logged_in?, :admin?
 
   def current_user
   	@current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -17,4 +17,16 @@ class ApplicationController < ActionController::Base
   		redirect_to root_path
   	end
   end
+
+  def require_admin
+    unless admin?
+      flash[:error] = 'You must be an admin to do that.'
+      redirect_to root_path
+    end
+  end
+
+  def admin?
+    current_user.admin if current_user
+  end
+
 end
